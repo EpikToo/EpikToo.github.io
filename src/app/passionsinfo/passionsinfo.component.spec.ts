@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import Typed from 'typed.js';
 
 import { PassionsinfoComponent } from './passionsinfo.component';
 

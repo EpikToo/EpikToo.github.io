@@ -1,4 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
 .main_background {
+    background-color: #000;
+}
+
+.secondary_background {
     background-color: #4C4C47;
 }
+
+.main_font {
+    color: white;
+    font-family: monospace;
+}
+
+.terminal-window {
+    background-color: #000;
+    color: white;
+    font-family: monospace;
+    padding: 10px;
+    overflow: hidden;
+    white-space: pre;
+    width: 100%;
+  }
+  
+  .typed-cursor {
+    animation: blink 1s infinite;
+  }
+  
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
