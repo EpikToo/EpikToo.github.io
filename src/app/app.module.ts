@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { NameinfoComponent } from './nameinfo/nameinfo.component';
@@ -9,6 +8,7 @@ import { ExperienceinfoComponent } from './experienceinfo/experienceinfo.compone
 import { StudiesinfoComponent } from './studiesinfo/studiesinfo.component';
 import { PassionsinfoComponent } from './passionsinfo/passionsinfo.component';
 import { MiscinfosComponent } from './miscinfos/miscinfos.component';
+import { ShowTextDirective } from './show-text.directive';
 
 
 @NgModule({
@@ -19,11 +19,11 @@ import { MiscinfosComponent } from './miscinfos/miscinfos.component';
     ExperienceinfoComponent,
     StudiesinfoComponent,
     PassionsinfoComponent,
-    MiscinfosComponent
+    MiscinfosComponent,
+    ShowTextDirective
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -15,19 +15,23 @@
 .terminal-window {
     background-color: #000;
     color: white;
-    font-family: monospace;
+    font-family: Courier;
     padding: 10px;
     overflow: hidden;
     white-space: pre;
     width: 100%;
+}
+
+.hidden-text {
+    visibility: hidden;
   }
   
-  .typed-cursor {
-    animation: blink 1s infinite;
+  .blink {
+    animation: blink 1s steps(5, start) infinite;
   }
   
   @keyframes blink {
-    50% {
-      opacity: 0;
+    to {
+      visibility: hidden;
     }
-  }
+}
