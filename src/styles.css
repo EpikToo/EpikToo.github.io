@@ -13,12 +13,10 @@
 }
 
 .terminal-window {
-    position: relative;
     background-color: #000;
     color: white;
     font-family: Courier;
     padding: 10px;
-    width: 100%;
     border: 5px solid #353532;
 }
 
@@ -38,7 +36,6 @@
 
 .terminal-bar{
   background-color: #353532;
-  position: relative;
   height: 15px;
   margin: -10px;
 }

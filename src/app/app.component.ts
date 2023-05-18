@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslationService } from './language/TranslationService';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Portfolio';
+  title: string = "Portofolio";
+  isEnglish: boolean = true;
+  
+  switchLanguage() {
+    this.isEnglish = !this.isEnglish;
+
+    if (this.isEnglish) {
+      // Logique pour passer à la langue anglaise
+    } else {
+      // Logique pour passer à la langue française
+    }
+  }
 }
