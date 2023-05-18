@@ -13,12 +13,13 @@
 }
 
 .terminal-window {
+    position: relative;
     background-color: #000;
     color: white;
     font-family: Courier;
     padding: 10px;
-    overflow: hidden;
     width: 100%;
+    border: 5px solid #353532;
 }
 
 .hidden-text {
@@ -33,4 +34,11 @@
     to {
       visibility: hidden;
     }
+}
+
+.terminal-bar{
+  background-color: #353532;
+  position: relative;
+  height: 15px;
+  margin: -10px;
 }
