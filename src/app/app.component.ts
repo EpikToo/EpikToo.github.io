@@ -1,22 +1,29 @@
-import { Component } from '@angular/core';
-import { TranslationService } from './language/TranslationService';
+import { Component, OnInit } from '@angular/core';
+import { TranslationService } from './translation.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title: string = "Portofolio";
-  isEnglish: boolean = true;
-  
-  switchLanguage() {
-    this.isEnglish = !this.isEnglish;
+export class AppComponent implements OnInit {
+  dataLoaded = false;
 
-    if (this.isEnglish) {
-      // Logique pour passer à la langue anglaise
-    } else {
-      // Logique pour passer à la langue française
-    }
+  constructor(public translationService: TranslationService) { }
+
+  ngOnInit() {
+    this.translationService.use('fr'); // pas besoin de souscrire ici
+  
+    this.translationService.dataLoaded$.subscribe(isLoaded => {
+      this.dataLoaded = isLoaded;
+    });
+  }
+
+  useFrench() {
+    this.translationService.use('fr');
+  }
+
+  useEnglish() {
+    this.translationService.use('en');
   }
 }

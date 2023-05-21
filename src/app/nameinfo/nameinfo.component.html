@@ -1,8 +1,6 @@
-<div class="terminal-window">
+<div class="terminal-window" *ngIf="dataLoaded">
   <div class="terminal-bar"></div>
-  <h1 class="main_font" appShowText delay="0">Savalle Florian</h1>
-  <div class="main_font" appShowText delay="2000">
-    IT Engineer Student
-  </div> 
+  <h1 class="main_font" appShowText delay="0">{{ translationService.translate('nametitle') }}</h1>
+  <div class="main_font" appShowText delay="2000">{{ translationService.translate('namecontent') }}</div> 
   <span class= "typed-cursor">_</span>
 </div>

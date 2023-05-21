@@ -1,6 +1,5 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import Typed from 'typed.js';
-
+import { Component } from '@angular/core';
+import { TranslationService } from '../translation.service';
 
 @Component({
   selector: 'app-profileinfo',
@@ -8,5 +7,5 @@ import Typed from 'typed.js';
   styleUrls: ['./profileinfo.component.css']
 })
 export class ProfileinfoComponent {
-
+  constructor(public translationService: TranslationService) {}
 }

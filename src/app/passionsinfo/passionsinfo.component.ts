@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslationService } from '../translation.service';
 
 @Component({
   selector: 'app-passionsinfo',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./passionsinfo.component.css']
 })
 export class PassionsinfoComponent {
-
+  constructor(public translationService: TranslationService) {}
 }

@@ -1,6 +1,5 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import Typed from 'typed.js';
-
+import { Component } from '@angular/core';
+import { TranslationService } from '../translation.service';
 
 @Component({
   selector: 'app-miscinfos',
@@ -8,5 +7,6 @@ import Typed from 'typed.js';
   styleUrls: ['./miscinfos.component.css']
 })
 export class MiscinfosComponent {
+  constructor(public translationService: TranslationService) {}
 
 }
