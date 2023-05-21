@@ -12,8 +12,13 @@ export class AppComponent implements OnInit {
   constructor(public translationService: TranslationService) { }
 
   ngOnInit() {
-    this.translationService.use('fr'); // pas besoin de souscrire ici
-  
+    const storedLang = localStorage.getItem('selectedLang');
+    if (storedLang) {
+      this.translationService.use(storedLang);
+    } else {
+      this.translationService.use('fr');
+    }
+
     this.translationService.dataLoaded$.subscribe(isLoaded => {
       this.dataLoaded = isLoaded;
     });
@@ -21,9 +26,17 @@ export class AppComponent implements OnInit {
 
   useFrench() {
     this.translationService.use('fr');
+    localStorage.setItem('selectedLang', 'fr');
+    this.reloadPage();
   }
 
   useEnglish() {
     this.translationService.use('en');
+    localStorage.setItem('selectedLang', 'en');
+    this.reloadPage();
+  }
+
+  private reloadPage(): void {
+    location.reload();
   }
 }
