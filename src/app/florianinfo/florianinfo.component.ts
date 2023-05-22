@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslationService } from '../translation.service';
 
 @Component({
   selector: 'app-florianinfo',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./florianinfo.component.css']
 })
 export class FlorianinfoComponent {
-
+  constructor(public translationService: TranslationService) {}
 }

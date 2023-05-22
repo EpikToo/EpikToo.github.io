@@ -7,34 +7,16 @@
     grid-template-columns: 1fr 1fr  ;
 }
 
-.nameinfo {
-    margin: 50px; 
-    width: 60%;   
+.container2{
+    margin-left: -250px;
 }
 
-.profileinfo {
-    margin: 50px;    
-    margin-left: -20%;
-}
-
-.miscinfo {
-    margin: 50px;    
-}
-
-.projectsinfo {
+.boxinfo {
     margin: 50px;
 }
 
-.experienceinfo {
-    margin: 50px;    
-}
-
-.passionsinfo {
-    margin: 50px;    
-}
-
-.studiesinfo {
-    margin: 50px;    
+.nameinfo {
+    width: 60%;   
 }
 
 .fr_btn {
@@ -44,6 +26,7 @@
     width: 40px;
     height: 40px;
     border-radius: 25px;
+    box-shadow: 0 0 10px 2px black;
 }
 .fr_btn:hover{
     filter: brightness(1.5);
@@ -56,6 +39,7 @@
     width: 40px;
     height: 40px;
     border-radius: 25px;
+    box-shadow: 0 0 10px 2px black;
 }
 .en_btn:hover{
     filter: brightness(1.5);

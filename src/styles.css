@@ -17,6 +17,7 @@
     font-family: Courier;
     padding: 10px;
     border: 5px solid #353532;
+    box-shadow: 0 0 10px 2px black;
 }
 
 .hidden-text {
