@@ -1,13 +1,28 @@
+.maindiv {
+    margin-top: 30px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr  ;
+}
+
 .nameinfo {
-    margin: 50px;    
+    margin: 50px; 
+    width: 60%;   
 }
 
 .profileinfo {
     margin: 50px;    
+    margin-left: -20%;
 }
 
 .miscinfo {
     margin: 50px;    
+}
+
+.projectsinfo {
+    margin: 50px;
 }
 
 .experienceinfo {
@@ -23,13 +38,25 @@
 }
 
 .fr_btn {
-    position: fixed;
+    position: absolute;
     top: 10px; 
     right: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 25px;
+}
+.fr_btn:hover{
+    filter: brightness(1.5);
 }
 
 .en_btn {
-    position: fixed;
+    position: absolute;
     top: 10px; 
-    right: 80px;
+    right: 60px;
+    width: 40px;
+    height: 40px;
+    border-radius: 25px;
+}
+.en_btn:hover{
+    filter: brightness(1.5);
 }

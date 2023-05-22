@@ -11,6 +11,9 @@ import { StudiesinfoComponent } from './studiesinfo/studiesinfo.component';
 import { PassionsinfoComponent } from './passionsinfo/passionsinfo.component';
 import { MiscinfosComponent } from './miscinfos/miscinfos.component';
 import { ShowTextDirective } from './show-text.directive';
+import { ProjectsinfoComponent } from './projectsinfo/projectsinfo.component';
+import { PictureinfoComponent } from './pictureinfo/pictureinfo.component';
+import { FlorianinfoComponent } from './florianinfo/florianinfo.component';
 
 
 @NgModule({
@@ -22,7 +25,10 @@ import { ShowTextDirective } from './show-text.directive';
     StudiesinfoComponent,
     PassionsinfoComponent,
     MiscinfosComponent,
-    ShowTextDirective
+    ProjectsinfoComponent,
+    ShowTextDirective,
+    PictureinfoComponent,
+    FlorianinfoComponent
   ],
   imports: [
     BrowserModule,

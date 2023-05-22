@@ -1,8 +1,18 @@
-<button (click)="useFrench()" class="fr_btn">Français</button>
-<button (click)="useEnglish()" class="en_btn">English</button>
-<div class = "nameinfo" > <app-nameinfo> </app-nameinfo> </div>
-<div class = "profileinfo" > <app-profileinfo></app-profileinfo> </div>
-<div class = "miscinfo" > <app-miscinfos></app-miscinfos> </div>
-<div class = "experienceinfo" > <app-experienceinfo></app-experienceinfo> </div>
-<div class = "studiesinfo" > <app-studiesinfo></app-studiesinfo> </div>
-<div class = "passionsinfo" > <app-passionsinfo></app-passionsinfo> </div>
+<img src="../assets/frflag.png" alt="FR" class="fr_btn" (click)="useFrench()">
+<img src="../assets/enflag.png" alt="EN" class="en_btn" (click)="useEnglish()">
+
+<div class="maindiv">
+    <div class = "container">
+        <div class = "nameinfo" > <app-nameinfo> </app-nameinfo> </div>
+        <div class = "profileinfo" > <app-profileinfo></app-profileinfo> </div>
+    </div>
+    <div class = "container">
+        <div class = "experienceinfo" > <app-experienceinfo></app-experienceinfo> </div>
+        <div class = "projectsinfo"> <app-projectsinfo></app-projectsinfo></div>
+    </div>
+    <div class = "container">
+        <div class = "studiesinfo" > <app-studiesinfo></app-studiesinfo> </div>
+        <div class = "miscinfo" > <app-miscinfos></app-miscinfos> </div>
+    </div>
+    <div class = "passionsinfo" > <app-passionsinfo></app-passionsinfo> </div>
+</div>

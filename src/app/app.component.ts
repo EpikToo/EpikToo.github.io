@@ -7,8 +7,6 @@ import { TranslationService } from './translation.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  dataLoaded = false;
-
   constructor(public translationService: TranslationService) { }
 
   ngOnInit() {
@@ -18,10 +16,6 @@ export class AppComponent implements OnInit {
     } else {
       this.translationService.use('fr');
     }
-
-    this.translationService.dataLoaded$.subscribe(isLoaded => {
-      this.dataLoaded = isLoaded;
-    });
   }
 
   useFrench() {
