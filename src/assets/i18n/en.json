@@ -7,5 +7,8 @@
     "misccontent1" : "Front-End Development : HTML, CSS, Typescript, Javascript",
     "misccontent2" : "Back-End Development : Python, C#, C, C++, PHP, VB.Net, SQL, VBA",
     "misccontent3" : "Frameworks : Django, .NET, Angular",
-    "misccontent4" : "Langages : French (Native), English (900+ TOEIC), Spanish (Notions)"
+    "misccontent4" : "Langages : French (Native), English (900+ TOEIC), Spanish (Notions)",
+    "experiencetitle" : "Experience",
+    "experiencecontent1" : "October 2022 - Today -> Development Engineer Apprentice at Covage (Mont-Saint-Aignan, France)",
+    "experiencecontent2" : "April 2022 – July 2022 -> IT Technician at ArianeGroup (Vernon, France)" 
 }

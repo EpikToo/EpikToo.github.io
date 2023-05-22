@@ -7,5 +7,8 @@
     "misccontent1" : "Développement Front-End : HTML, CSS, Typescript, Javascript",
     "misccontent2" : "Développement Back-End : Python, C#, C, C++, PHP, VB.Net, SQL, VBA",
     "misccontent3" : "Frameworks : Django, .NET, Angular",
-    "misccontent4" : "Languages : Français (Natif), Anglais (900+ TOEIC), Espagnol (Notions)"
+    "misccontent4" : "Languages : Français (Natif), Anglais (900+ TOEIC), Espagnol (Notions)",
+    "experiencetitle" : "Expérience",
+    "experiencecontent1" : "Octobre 2022 - Aujourd'hui -> Apprenti Ingénieur Développement chez Covage (Mont-Saint-Aignan, France)",
+    "experiencecontent2" : "Avril 2022 – Juillet 2022 -> Technicien Informatique chez ArianeGroup (Vernon, France)" 
 }
