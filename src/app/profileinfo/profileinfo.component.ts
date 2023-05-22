@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TranslationService } from '../translation.service';
 
 @Component({
@@ -6,6 +6,14 @@ import { TranslationService } from '../translation.service';
   templateUrl: './profileinfo.component.html',
   styleUrls: ['./profileinfo.component.css']
 })
-export class ProfileinfoComponent {
-  constructor(public translationService: TranslationService) {}
+export class ProfileinfoComponent implements OnInit{
+  dataLoaded = false;
+
+  constructor(public translationService: TranslationService) { }
+
+  ngOnInit() {
+    this.translationService.dataLoaded$.subscribe(isLoaded => {
+      this.dataLoaded = isLoaded;
+    });
+  }
 }

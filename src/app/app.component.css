@@ -21,3 +21,15 @@
 .studiesinfo {
     margin: 50px;    
 }
+
+.fr_btn {
+    position: fixed;
+    top: 10px; 
+    right: 10px;
+}
+
+.en_btn {
+    position: fixed;
+    top: 10px; 
+    right: 80px;
+}
