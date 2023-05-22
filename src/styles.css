@@ -3,7 +3,11 @@
 }
 
 .secondary_background {
-    background-color: #4C4C47;
+    background-image: url(assets/bliss.jpg) ;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 .main_font {
