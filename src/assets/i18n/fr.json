@@ -20,5 +20,17 @@
     "floriancontent2" : "florian.savalle@viacesi.fr",
     "floriancontent3" : "06.05.84.52.09",
     "floriancontent4" : "Permis B + Véhicule personnel",
-    "floriancontent5" : "http://www.linkedin.com/in/florian-savalle-76aa63205/"
+    "floriancontent5" : "http://www.linkedin.com/in/florian-savalle-76aa63205/",
+    "projectstitle" : "Projets",
+    "projectscontent1" : "Kosc Plateforme : Plateforme WEB réunissant les process Covage (Django, Angular)" ,
+    "projectscontent2" : "RALab : Logiciel de rédaction de laboratoire (VBA) " ,
+    "projectscontent3" : "EasySave : Application de sauvegardes de fichiers (C# .NET) " ,
+    "projectscontent4" : "CHU : Projet Big Data à but hospitalier (Talend, Hive, PowerBI) " ,
+    "projectscontent5" : "Elifibre Interco BSB : Logiciel permettant d'établir l'éligibilité à la fibre (C# .Net, Ajax) " ,
+    "projectscontent6" : "ABSERGO SI : Architecture SI pour entreprise fictive" ,
+    "projectscontent7" : "ViteMonStage : Site WEB pour la recherche de stages (PHP Natif)",
+    "projectscontent8" : "Funkytown : Architecture réseaux pour une ville fictive",
+    "projectscontent9" : "StrongBox : Système embarqué pour coffre-fort (C Arduino)" ,
+    "projectscontent10" : "ADEME : Algorithmique avancée (Python)" ,
+    "projectscontent11" : "FoxStats : Récupération et traitement des informations du jeu Foxhole (Django, Angular)"
 }
