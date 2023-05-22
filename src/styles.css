@@ -1,8 +1,4 @@
-.main_background {
-    background-color: #000;
-}
-
-.secondary_background {
+.background {
     background-image: url(assets/bliss.jpg) ;
     background-position: center;
     background-repeat: no-repeat;
