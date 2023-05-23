@@ -28,13 +28,17 @@ export class ShowTextDirective implements OnInit {
       if (charIndex < originalText.length) {
         displayedText += originalText[charIndex];
         this.renderer.setProperty(this.el.nativeElement, 'textContent', displayedText);
+
+        if (originalText[charIndex] === '>') {
+          const cursorSpan = this.renderer.createElement('span');
+          this.renderer.addClass(cursorSpan, 'typed-cursor');
+          this.renderer.setProperty(cursorSpan, 'textContent', '_');
+          this.renderer.appendChild(this.el.nativeElement, cursorSpan);
+          charIndex++; // skip '_' as it's already added
+        } 
+
         charIndex++;
         setTimeout(showNextChar, getRandomTypingInt());
-      } else if (this.cursor) { // Si le curseur est présent
-        const cursorElement = this.document.querySelector(this.cursor); // Obtenez l'élément du curseur
-        if (cursorElement) {
-          cursorElement.classList.add('blink'); // Faites clignoter le curseur
-        }
       }
     };
 

@@ -11,6 +11,12 @@
     font-family: monospace;
 }
 
+.underscore_font {
+  color: white;
+  font-weight: bolder;
+  font-family: monospace;
+}
+
 .terminal-window {
     background-color: #000;
     color: white;
@@ -22,16 +28,15 @@
 
 .hidden-text {
     visibility: hidden;
-  }
+}
   
-  .blink {
-    animation: blink 1s steps(5, start) infinite;
-  }
-  
-  @keyframes blink {
-    to {
-      visibility: hidden;
-    }
+@keyframes blink {
+  0%, 49% {opacity: 1;}
+  50%, 100% {opacity: 0;}
+}
+
+.typed-cursor {
+  animation: blink 1s infinite;
 }
 
 .terminal-bar{
