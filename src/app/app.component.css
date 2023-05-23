@@ -19,6 +19,11 @@
     width: 60%;   
 }
 
+.pictureinfo {
+    float: right;
+    margin-left: 100px;
+}
+
 .fr_btn {
     position: absolute;
     top: 10px; 

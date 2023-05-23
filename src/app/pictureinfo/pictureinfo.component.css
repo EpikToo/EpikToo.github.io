@@ -1,9 +1,23 @@
 .pic {
     box-shadow: inset 0 0 10px 2px black;
-    height: 100px;
 }
 
 .special {
     width: 20%;
     position: relative;
+    overflow: hidden; /* Masque le contenu qui dépasse */
+}
+
+.image-container {
+    /* Autres styles pour la div conteneur de l'image */
+    width: 100%; /* Assurez-vous que la div conteneur occupe toute la largeur de la div parente */
+    height: auto; /* Ajuste automatiquement la hauteur en fonction de la taille de l'image */
+    overflow: hidden; /* Masque le contenu de l'image qui dépasse */
+}
+
+.image-container .pic {
+    /* Styles supplémentaires pour l'image si nécessaire */
+    display: block; /* Assurez-vous que l'image est affichée en tant que bloc */
+    max-width: 100%; /* Limite la largeur maximale de l'image à 100% de la div parente */
+    height: auto; /* Ajuste automatiquement la hauteur en fonction de la largeur maximale */
 }
