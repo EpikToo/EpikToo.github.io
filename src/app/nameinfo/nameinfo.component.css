@@ -1,11 +1,26 @@
-.name_font1{
-    color: white;
-    font-family: monospace;
-    font-size: 80px;
+@media (min-width: 800px) {
+    .name_font1{
+        color: white;
+        font-family: monospace;
+        font-size: 80px;
+    }
+    .name_font2{
+        color: white;
+        font-family: monospace;
+        font-size: 30px;
+    }
+    
 }
 
-.name_font2{
-    color: white;
-    font-family: monospace;
-    font-size: 30px;
+@media (max-width: 800px) {
+    .name_font1{
+        color: white;
+        font-family: monospace;
+        font-size: 30px;
+    }
+    .name_font2{
+        color: white;
+        font-family: monospace;
+        font-size: 15px;
+    }    
 }
