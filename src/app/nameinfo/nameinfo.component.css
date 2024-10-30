@@ -2,14 +2,14 @@
     .name_font1{
         color: white;
         font-family: monospace;
-        font-size: 80px;
+        font-size: 52px;
     }
     .name_font2{
         color: white;
         font-family: monospace;
         font-size: 30px;
     }
-    
+
 }
 
 @media (max-width: 800px) {
@@ -22,5 +22,5 @@
         color: white;
         font-family: monospace;
         font-size: 15px;
-    }    
+    }
 }
