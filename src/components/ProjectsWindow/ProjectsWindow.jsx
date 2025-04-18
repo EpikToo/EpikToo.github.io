@@ -52,12 +52,13 @@ const ProjectCard = ({ content, index }) => {
 const ProjectsWindow = () => {
     const { t } = useTranslation();
     const [searchQuery, setSearchQuery] = useState('');
-
     const allProjects = [];
-    let i = 1;
-    while (t(`about.projectscontent${i}`, { defaultValue: '' }) !== '') {
-        allProjects.push(t(`about.projectscontent${i}`));
-        i++;
+    for (let i = 1; i <= 30; i++) {
+        const projectKey = `about.projectscontent${i}`;
+        const content = t(projectKey, { defaultValue: '' });
+        if (content && content.trim() !== '') {
+            allProjects.push(content);
+        }
     }
 
     const filteredProjects = allProjects.filter(project =>
