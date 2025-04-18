@@ -109,7 +109,10 @@ const resources = {
                 "projectscontent12": "StrongBox: Security-focused embedded system for valuables storage (C Arduino) at CESI",
                 "projectscontent13": "FoxStats: Game data analytics platform for Foxhole (Django, Angular) personal project",
                 "projectscontent14": "GolChess: Chess engine with reinforcement learning capabilities (Python) personal project",
-                "projectscontent15": "ViteMonStage: Internship matching platform for students (Native PHP) at CESI"
+                "projectscontent15": "ViteMonStage: Internship matching platform for students (Native PHP) at CESI",
+                "projectscontent16": "API-CRI: Final-year project at Covage, a Django service integrated with the entire Covage environment for processing fiber optic technician intervention reports. Full project management, coordination with external developers, personal development, and deployment (Django, REST, CI/CD) at Covage",
+                "projectscontent17": "Leyanda: Current CESI project involving advanced AI techniques including image classification, autoencoders, and image captioning using TensorFlow (Python, TensorFlow, Computer Vision) at CESI",
+                "projectscontent18": "Memore: Personal project to create a home-based Jarvis-like AI assistant hosted on a repurposed PC, using open-source AI (likely deepseek) with a custom memory system and Sesame AI voice output. Planned to be developed with PyTorch (Python, PyTorch, NLP) personal project"
             }
         }
     },
@@ -220,7 +223,10 @@ const resources = {
                 "projectscontent12": "StrongBox : Système embarqué orienté sécurité pour stockage d'objets de valeur (C Arduino) au CESI",
                 "projectscontent13": "FoxStats : Plateforme d'analyse de données de jeu pour Foxhole (Django, Angular) projet personnel",
                 "projectscontent14": "GolChess : Moteur d'échecs avec capacités d'apprentissage par renforcement (Python) projet personnel",
-                "projectscontent15": "ViteMonStage : Plateforme de mise en relation pour stages étudiants (PHP natif) au CESI"
+                "projectscontent15": "ViteMonStage : Plateforme de mise en relation pour stages étudiants (PHP natif) au CESI",
+                "projectscontent16": "API-CRI : Projet de fin d'études chez Covage, un service Django intégré à l'ensemble de l'environnement Covage pour le traitement des comptes rendus d'intervention des techniciens fibre optique. Gestion complète du projet, coordination avec des développeurs externes, développement personnel et déploiement (Django, REST, CI/CD) chez Covage",
+                "projectscontent17": "Leyanda : Projet actuel au CESI impliquant des techniques avancées d'IA, notamment la classification d'images, les autoencodeurs et le captioning d'images avec TensorFlow (Python, TensorFlow, Vision par ordinateur) au CESI",
+                "projectscontent18": "Memore : Projet personnel visant à créer un assistant IA type Jarvis pour la maison, hébergé sur un PC réutilisé, utilisant une IA open-source (probablement deepseek) avec un système de mémoire personnalisé et une sortie vocale via Sesame AI. Prévu pour être développé avec PyTorch (Python, PyTorch, NLP) projet personnel"
             }
         }
     }
