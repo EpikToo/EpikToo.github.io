@@ -13,16 +13,17 @@
 /* Z-index management for mobile */
 .start-menu,
 .language-selector-dropdown {
-    z-index: 1000 !important;
+    z-index: 9999 !important;
+    position: fixed !important;
 }
 
 /* Windows should have a lower z-index than menus */
 .win98-window {
-    z-index: 100;
+    z-index: 100 !important;
 }
 
 .win98-window.active {
-    z-index: 900;
+    z-index: 900 !important;
 }
 
 /* Taskbar should stay on top */
@@ -33,11 +34,6 @@
 
 /* Fixes for mobile scaling */
 @media (max-width: 768px) {
-    /* Fix content overflowing */
-    .window-content {
-        padding-bottom: 40px !important; /* Make room for the taskbar */
-    }
-
     /* Better button spacing for touch */
     button {
         margin: 2px;
@@ -77,5 +73,22 @@
     /* Fix window title overflow */
     .window-title-bar .truncate {
         max-width: 70% !important;
+    }
+
+    /* Fix maximized windows on mobile */
+    .win98-window {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Ensure windows go right to the edge on mobile */
+    .win98-window.active {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Remove any window padding */
+    .win98-window > div {
+        margin: 0 !important;
     }
 }

@@ -51,7 +51,11 @@ const StartMenu = ({ isOpen, onClose, windows, onWindowSelect }) => {
     const handleCloseClick = () => {
         const confirmClose = window.confirm(t('menu.confirm_close') || "Are you sure you want to close the portfolio?");
         if (confirmClose) {
-            document.body.innerHTML = '<div style="width:100%;height:100vh;display:flex;align-items:center;justify-content:center;font-family:sans-serif;"><h1>Portfolio closed. Refresh page to restart.</h1></div>';
+            window.open('', '_self').close();
+            setTimeout(() => {
+                window.location.href = 'about:blank';
+                window.close();
+            }, 100);
         }
     };
 

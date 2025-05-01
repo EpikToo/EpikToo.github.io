@@ -30,18 +30,16 @@ const Window = ({
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
-        // Check if device is mobile
         const checkMobile = () => {
             const byWidth = window.innerWidth < 768;
             const byUserAgent = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
             const byTouchPoints = navigator.maxTouchPoints > 0;
 
             const isMobileDevice = byWidth || (byUserAgent && byTouchPoints);
-
             setIsMobile(isMobileDevice);
 
             if (isMobileDevice && !isMaximized) {
-                setTimeout(() => maximizeWindow(), 0);
+                setTimeout(() => maximizeWindow(), 100);
             }
         };
 
@@ -59,7 +57,6 @@ const Window = ({
 
         adjustWindowPosition();
 
-        // Auto-maximize on mobile on mount
         if (isMobile) {
             setTimeout(() => {
                 maximizeWindow();
@@ -72,9 +69,10 @@ const Window = ({
             if (isMaximized && windowRef.current) {
                 const parent = windowRef.current.parentElement;
                 if (parent) {
+                    const taskbarHeight = 40;
                     setSize({
                         width: parent.clientWidth,
-                        height: parent.clientHeight - 40 // Adjusted for taskbar
+                        height: parent.clientHeight - taskbarHeight
                     });
                     setPosition({ x: 0, y: 0 });
                 }
@@ -123,10 +121,11 @@ const Window = ({
             setPreMaximizeState(saveCurrentState());
             const parent = windowRef.current?.parentElement;
             if (parent) {
+                const taskbarHeight = 40;
                 setPosition({ x: 0, y: 0 });
                 setSize({
                     width: parent.clientWidth,
-                    height: parent.clientHeight - 40 // Adjusted for taskbar
+                    height: parent.clientHeight - taskbarHeight
                 });
                 setIsMaximized(true);
             }
@@ -136,7 +135,7 @@ const Window = ({
     const toggleMaximize = () => {
         if (!isMaximized) {
             maximizeWindow();
-        } else if (!isMobile) { // Only allow un-maximize on desktop
+        } else if (!isMobile) {
             setPosition(preMaximizeState.position);
             setSize(preMaximizeState.size);
             setIsMaximized(false);
@@ -152,13 +151,13 @@ const Window = ({
 
     const handleTitleBarDoubleClick = (e) => {
         e.preventDefault();
-        if (!isMobile) { // Only toggle on desktop
+        if (!isMobile) {
             toggleMaximize();
         }
     };
 
     const handleMouseDown = (e) => {
-        if (isMaximized || isMobile) return; // No dragging when maximized or on mobile
+        if (isMaximized || isMobile) return;
         if (e.target.closest('.resize-handle')) return;
         if (!e.target.closest('.window-title-bar')) return;
 
@@ -171,7 +170,7 @@ const Window = ({
     };
 
     const handleResizeStart = (e, direction) => {
-        if (isMaximized || isMobile) return; // No resizing when maximized or on mobile
+        if (isMaximized || isMobile) return;
         e.stopPropagation();
         const rect = windowRef.current.getBoundingClientRect();
         setResizeStart({
@@ -192,7 +191,6 @@ const Window = ({
             let newX = e.clientX - dragOffset.x;
             let newY = e.clientY - dragOffset.y;
 
-            // Ensure title bar remains visible
             newX = Math.max(-windowRect.width + 100, Math.min(newX, parentRect.width - 50));
             newY = Math.max(0, Math.min(newY, parentRect.height - 30));
 
@@ -268,7 +266,7 @@ const Window = ({
     }, [isDragging, isResizing]);
 
     const handleTouchStart = (e) => {
-        if (isMaximized || isMobile) return; // No dragging when maximized or on mobile
+        if (isMaximized || isMobile) return;
         if (!e.target.closest('.window-title-bar')) return;
 
         const touch = e.touches[0];
@@ -332,7 +330,6 @@ const Window = ({
         >
             <div className="bg-win98-button-face border-2 border-white h-full w-full shadow-win98-window">
                 <div className="border-2 border-win98-window-border-dark h-full flex flex-col">
-                    {/* Title bar - Darker shade of blue for active windows */}
                     <div
                         className={`window-title-bar px-2 py-1 flex justify-between items-center cursor-grab select-none
                             ${isActive ? 'bg-[#000055] text-white' : 'bg-gray-500 text-gray-200'}`}
@@ -343,7 +340,6 @@ const Window = ({
                         <span className="font-bold text-xs md:text-sm truncate max-w-[calc(100%-60px)]">
                             {title}
                         </span>
-                        {/* Control buttons */}
                         <div className="flex gap-1">
                             <button
                                 className="min-w-[18px] h-[18px] md:min-w-[20px] md:h-[20px] px-1 shadow-win98-btn hover:shadow-win98-btn-pressed bg-win98-button-face flex items-center justify-center"
@@ -368,15 +364,12 @@ const Window = ({
                         </div>
                     </div>
 
-                    {/* Window content */}
                     <div ref={contentRef} className="flex-1 overflow-hidden relative">
                         {children}
                     </div>
 
-                    {/* Resize handles - Only show on desktop */}
                     {!isMaximized && !isMobile && (
                         <>
-                            {/* Corner resize handles */}
                             <div
                                 className="resize-handle absolute top-0 right-0 w-5 h-5 cursor-ne-resize z-10"
                                 onMouseDown={(e) => handleResizeStart(e, 'ne')}
@@ -394,7 +387,6 @@ const Window = ({
                                 onMouseDown={(e) => handleResizeStart(e, 'nw')}
                             />
 
-                            {/* Edge resize handles */}
                             <div
                                 className="resize-handle absolute top-0 left-5 right-5 h-3 cursor-n-resize z-10"
                                 onMouseDown={(e) => handleResizeStart(e, 'n')}

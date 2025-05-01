@@ -123,12 +123,26 @@ body {
 
 /* Fix z-index issues */
 .start-menu {
-    z-index: 1000 !important; /* Ensures start menu is always on top */
+    z-index: 9999 !important;
 }
 
-/* Language selector dropdown should be on top */
 .language-selector-dropdown {
-    z-index: 1000 !important;
+    z-index: 9999 !important;
+}
+
+/* Windows should always be below menus */
+.win98-window {
+    z-index: 100 !important;
+}
+
+.win98-window.active {
+    z-index: 900 !important;
+}
+
+/* Taskbar should stay on top of windows but below menus */
+.h-taskbar {
+    z-index: 950 !important;
+    position: relative;
 }
 
 /* Mobile optimizations */

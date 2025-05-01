@@ -44,9 +44,12 @@ const AppContent = () => {
     });
 
     useEffect(() => {
-        // Check if device is mobile
         const checkMobile = () => {
-            setIsMobile(window.innerWidth < 768);
+            const isMobileDevice = window.innerWidth < 768 ||
+                (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+                    && navigator.maxTouchPoints > 0);
+
+            setIsMobile(isMobileDevice);
         };
 
         checkMobile();
@@ -123,7 +126,6 @@ const AppContent = () => {
         setWindows(prev => {
             const newWindows = { ...prev };
 
-            // On mobile, close all other windows to avoid clutter
             if (isMobile) {
                 Object.keys(newWindows).forEach(key => {
                     if (key !== windowId) {
@@ -172,16 +174,15 @@ const AppContent = () => {
     };
 
     const getWindowPosition = (index) => {
-        // For mobile, position windows at top
         if (isMobile) {
             return { x: 0, y: 0 };
         }
 
         const positions = [
-            { x: 50, y: 50 },    // Terminal
-            { x: 120, y: 40 },   // About
-            { x: 180, y: 100 },  // Projects
-            { x: 80, y: 120 }    // Experience
+            { x: 50, y: 50 },
+            { x: 120, y: 40 },
+            { x: 180, y: 100 },
+            { x: 80, y: 120 }
         ];
 
         if (index < positions.length) {
@@ -196,14 +197,12 @@ const AppContent = () => {
 
     const getWindowSize = (windowId) => {
         if (isMobile) {
-            // Get screen dimensions and return appropriate size for fullscreen
-            const width = window.innerWidth;
-            // Subtract taskbar (40px) and a small amount for padding at bottom (8px)
-            const height = window.innerHeight - 48;
-            return { width, height };
+            return {
+                width: window.innerWidth,
+                height: window.innerHeight - 40
+            };
         }
 
-        // Default sizes for desktop
         const sizes = {
             terminal: { width: 600, height: 400 },
             about: { width: 750, height: 550 },
@@ -229,7 +228,7 @@ const AppContent = () => {
                         isMinimized={windows.terminal.isMinimized}
                         defaultPosition={getWindowPosition(0)}
                         defaultSize={getWindowSize('terminal')}
-                        className="win98-window"
+                        className={`win98-window ${windows.terminal.isActive ? 'active' : ''}`}
                     >
                         <Terminal onCommandExecuted={handleTerminalCommand} />
                     </Window>
@@ -243,7 +242,7 @@ const AppContent = () => {
                         isMinimized={windows.about.isMinimized}
                         defaultPosition={getWindowPosition(1)}
                         defaultSize={getWindowSize('about')}
-                        className="win98-window"
+                        className={`win98-window ${windows.about.isActive ? 'active' : ''}`}
                     >
                         <AboutWindow />
                     </Window>
@@ -257,7 +256,7 @@ const AppContent = () => {
                         isMinimized={windows.projects.isMinimized}
                         defaultPosition={getWindowPosition(2)}
                         defaultSize={getWindowSize('projects')}
-                        className="win98-window"
+                        className={`win98-window ${windows.projects.isActive ? 'active' : ''}`}
                     >
                         <ProjectsWindow />
                     </Window>
@@ -271,7 +270,7 @@ const AppContent = () => {
                         isMinimized={windows.experience.isMinimized}
                         defaultPosition={getWindowPosition(3)}
                         defaultSize={getWindowSize('experience')}
-                        className="win98-window"
+                        className={`win98-window ${windows.experience.isActive ? 'active' : ''}`}
                     >
                         <ExperienceWindow />
                     </Window>
