@@ -3,6 +3,7 @@ import React, { createContext, useContext, useState, useCallback } from 'react';
 const WindowManagerContext = createContext(null);
 
 export const WindowManagerProvider = ({ children }) => {
+    // Start with a higher base z-index to ensure windows are above other elements
     const [windows, setWindows] = useState([]); // Liste des fenêtres avec leur z-index
     const [nextZIndex, setNextZIndex] = useState(100); // Z-index de base pour les nouvelles fenêtres
 
@@ -19,10 +20,13 @@ export const WindowManagerProvider = ({ children }) => {
     const bringToFront = useCallback((id) => {
         setWindows(prev => {
             const newWindows = prev.filter(w => w.id !== id);
-            setNextZIndex(prev => prev + 1);
-            return [...newWindows, { id, zIndex: nextZIndex }];
+            // Increment to ensure the window is above everything else
+            const newZIndex = nextZIndex + 10;
+            setNextZIndex(newZIndex + 1);
+            return [...newWindows, { id, zIndex: newZIndex }];
         });
-        return nextZIndex;
+        // Adding 10 to ensure there's enough space between indices
+        return nextZIndex + 10;
     }, [nextZIndex]);
 
     return (

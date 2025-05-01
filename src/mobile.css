@@ -1,0 +1,81 @@
+/* Mobile optimization fixes */
+
+/* Hide scrollbars for cleaner mobile appearance */
+.scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+    display: none;
+}
+
+/* Z-index management for mobile */
+.start-menu,
+.language-selector-dropdown {
+    z-index: 1000 !important;
+}
+
+/* Windows should have a lower z-index than menus */
+.win98-window {
+    z-index: 100;
+}
+
+.win98-window.active {
+    z-index: 900;
+}
+
+/* Taskbar should stay on top */
+.h-taskbar {
+    z-index: 950 !important;
+    position: relative;
+}
+
+/* Fixes for mobile scaling */
+@media (max-width: 768px) {
+    /* Fix content overflowing */
+    .window-content {
+        padding-bottom: 40px !important; /* Make room for the taskbar */
+    }
+
+    /* Better button spacing for touch */
+    button {
+        margin: 2px;
+        min-height: 36px;
+    }
+
+    /* Force menu position to be fixed relative to viewport */
+    .start-menu {
+        position: fixed !important;
+        bottom: 40px !important;
+        left: 1px !important;
+        max-height: calc(100vh - 60px) !important;
+    }
+
+    /* Fix language dropdown position */
+    .language-selector-dropdown {
+        position: fixed !important;
+        bottom: 40px !important;
+        right: 1px !important;
+    }
+
+    /* Smaller padding for mobile */
+    .p-2 {
+        padding: 0.25rem !important;
+    }
+
+    .px-2 {
+        padding-left: 0.25rem !important;
+        padding-right: 0.25rem !important;
+    }
+
+    .py-2 {
+        padding-top: 0.25rem !important;
+        padding-bottom: 0.25rem !important;
+    }
+
+    /* Fix window title overflow */
+    .window-title-bar .truncate {
+        max-width: 70% !important;
+    }
+}

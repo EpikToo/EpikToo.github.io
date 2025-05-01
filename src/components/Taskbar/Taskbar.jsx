@@ -26,7 +26,7 @@ const WindowButton = ({ title, isActive, isMinimized, onClick }) => {
 
     return (
         <button
-            className={`h-[30px] px-1 md:px-2 flex items-center gap-1 md:gap-2 min-w-[90px] max-w-[150px] md:min-w-[150px] md:max-w-[200px]
+            className={`h-[30px] px-1 md:px-2 flex items-center gap-1 md:gap-2 min-w-[80px] w-full max-w-[120px] sm:min-w-[90px] sm:max-w-[150px] md:min-w-[150px] md:max-w-[200px]
                 ${isActive
                 ? 'shadow-win98-btn-pressed bg-win98-button-face'
                 : isMinimized
@@ -35,7 +35,7 @@ const WindowButton = ({ title, isActive, isMinimized, onClick }) => {
             }`}
             onClick={onClick}
         >
-            {getIcon()}
+            <div className="flex-shrink-0">{getIcon()}</div>
             <span className="truncate text-xs md:text-sm">{title}</span>
         </button>
     );
@@ -65,8 +65,8 @@ const SystemTray = () => {
                     />
                 )}
             </div>
-            <div className="w-px h-[24px] mx-0.5 md:mx-1 border-l border-win98-window-border-dark border-r border-white" />
-            <span className="text-xs md:text-sm font-medium">
+            <div className="w-px h-[24px] mx-0.5 border-l border-win98-window-border-dark border-r border-white" />
+            <span className="text-xs md:text-sm font-medium whitespace-nowrap">
                 {time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
             </span>
         </div>
@@ -91,7 +91,7 @@ const Taskbar = ({ windows, onWindowClick, onStartMenuSelect }) => {
 
     return (
         <>
-            <div className="h-taskbar bg-win98-taskbar flex items-center p-0.5 md:p-1 gap-0.5 md:gap-1 border-t-2 border-white relative">
+            <div className="h-taskbar bg-win98-taskbar flex items-center p-0.5 gap-0.5 md:gap-1 border-t-2 border-white relative">
                 <div className="relative">
                     <button
                         className={`start-button h-[30px] px-1 md:px-2 flex items-center gap-1 md:gap-2 font-bold bg-win98-button-face
@@ -112,9 +112,9 @@ const Taskbar = ({ windows, onWindowClick, onStartMenuSelect }) => {
                     )}
                 </div>
 
-                <div className="w-px h-[30px] mx-0.5 md:mx-1 border-l border-win98-window-border-dark border-r border-white" />
+                <div className="w-px h-[30px] mx-0.5 border-l border-win98-window-border-dark border-r border-white" />
 
-                <div className="flex-1 flex gap-0.5 md:gap-1 items-center overflow-x-auto">
+                <div className="flex-1 flex gap-0.5 md:gap-1 items-center overflow-x-auto scrollbar-none">
                     {Object.entries(windows).map(([id, window]) =>
                             window.isOpen && (
                                 <WindowButton
@@ -131,15 +131,17 @@ const Taskbar = ({ windows, onWindowClick, onStartMenuSelect }) => {
                 <SystemTray />
             </div>
 
-            <StartMenu
-                isOpen={isStartMenuOpen}
-                onClose={() => setIsStartMenuOpen(false)}
-                windows={windows}
-                onWindowSelect={(windowId) => {
-                    onStartMenuSelect(windowId);
-                    setIsStartMenuOpen(false);
-                }}
-            />
+            {isStartMenuOpen && (
+                <StartMenu
+                    isOpen={isStartMenuOpen}
+                    onClose={() => setIsStartMenuOpen(false)}
+                    windows={windows}
+                    onWindowSelect={(windowId) => {
+                        onStartMenuSelect(windowId);
+                        setIsStartMenuOpen(false);
+                    }}
+                />
+            )}
         </>
     );
 };

@@ -27,12 +27,44 @@ const Window = ({
     const [isActive, setIsActive] = useState(false);
     const windowRef = useRef(null);
     const contentRef = useRef(null);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        // Check if device is mobile
+        const checkMobile = () => {
+            const byWidth = window.innerWidth < 768;
+            const byUserAgent = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            const byTouchPoints = navigator.maxTouchPoints > 0;
+
+            const isMobileDevice = byWidth || (byUserAgent && byTouchPoints);
+
+            setIsMobile(isMobileDevice);
+
+            if (isMobileDevice && !isMaximized) {
+                setTimeout(() => maximizeWindow(), 0);
+            }
+        };
+
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+
+        return () => {
+            window.removeEventListener('resize', checkMobile);
+        };
+    }, []);
 
     useEffect(() => {
         const initialZIndex = registerWindow(windowId);
         setZIndex(initialZIndex);
 
         adjustWindowPosition();
+
+        // Auto-maximize on mobile on mount
+        if (isMobile) {
+            setTimeout(() => {
+                maximizeWindow();
+            }, 100);
+        }
 
         const handleWindowResize = () => {
             adjustWindowPosition();
@@ -42,8 +74,9 @@ const Window = ({
                 if (parent) {
                     setSize({
                         width: parent.clientWidth,
-                        height: parent.clientHeight - 40
+                        height: parent.clientHeight - 40 // Adjusted for taskbar
                     });
+                    setPosition({ x: 0, y: 0 });
                 }
             }
         };
@@ -53,7 +86,7 @@ const Window = ({
             window.removeEventListener('resize', handleWindowResize);
             unregisterWindow(windowId);
         };
-    }, [isMaximized]);
+    }, [isMaximized, isMobile]);
 
     const adjustWindowPosition = () => {
         if (!windowRef.current) return;
@@ -85,20 +118,29 @@ const Window = ({
         size: { ...size }
     });
 
-    const toggleMaximize = () => {
+    const maximizeWindow = () => {
         if (!isMaximized) {
             setPreMaximizeState(saveCurrentState());
-            const parent = windowRef.current.parentElement;
-            setPosition({ x: 0, y: 0 });
-            setSize({
-                width: parent.clientWidth,
-                height: parent.clientHeight - 40
-            });
-        } else {
+            const parent = windowRef.current?.parentElement;
+            if (parent) {
+                setPosition({ x: 0, y: 0 });
+                setSize({
+                    width: parent.clientWidth,
+                    height: parent.clientHeight - 40 // Adjusted for taskbar
+                });
+                setIsMaximized(true);
+            }
+        }
+    };
+
+    const toggleMaximize = () => {
+        if (!isMaximized) {
+            maximizeWindow();
+        } else if (!isMobile) { // Only allow un-maximize on desktop
             setPosition(preMaximizeState.position);
             setSize(preMaximizeState.size);
+            setIsMaximized(false);
         }
-        setIsMaximized(!isMaximized);
     };
 
     const handleWindowClick = (e) => {
@@ -110,11 +152,13 @@ const Window = ({
 
     const handleTitleBarDoubleClick = (e) => {
         e.preventDefault();
-        toggleMaximize();
+        if (!isMobile) { // Only toggle on desktop
+            toggleMaximize();
+        }
     };
 
     const handleMouseDown = (e) => {
-        if (isMaximized) return;
+        if (isMaximized || isMobile) return; // No dragging when maximized or on mobile
         if (e.target.closest('.resize-handle')) return;
         if (!e.target.closest('.window-title-bar')) return;
 
@@ -127,7 +171,7 @@ const Window = ({
     };
 
     const handleResizeStart = (e, direction) => {
-        if (isMaximized) return;
+        if (isMaximized || isMobile) return; // No resizing when maximized or on mobile
         e.stopPropagation();
         const rect = windowRef.current.getBoundingClientRect();
         setResizeStart({
@@ -224,7 +268,7 @@ const Window = ({
     }, [isDragging, isResizing]);
 
     const handleTouchStart = (e) => {
-        if (isMaximized) return;
+        if (isMaximized || isMobile) return; // No dragging when maximized or on mobile
         if (!e.target.closest('.window-title-bar')) return;
 
         const touch = e.touches[0];
@@ -307,12 +351,14 @@ const Window = ({
                             >
                                 <WindowControls.Minimize />
                             </button>
-                            <button
-                                className="min-w-[18px] h-[18px] md:min-w-[20px] md:h-[20px] px-1 shadow-win98-btn hover:shadow-win98-btn-pressed bg-win98-button-face flex items-center justify-center"
-                                onClick={toggleMaximize}
-                            >
-                                <WindowControls.Maximize />
-                            </button>
+                            {!isMobile && (
+                                <button
+                                    className="min-w-[18px] h-[18px] md:min-w-[20px] md:h-[20px] px-1 shadow-win98-btn hover:shadow-win98-btn-pressed bg-win98-button-face flex items-center justify-center"
+                                    onClick={toggleMaximize}
+                                >
+                                    <WindowControls.Maximize />
+                                </button>
+                            )}
                             <button
                                 className="min-w-[18px] h-[18px] md:min-w-[20px] md:h-[20px] px-1 shadow-win98-btn hover:shadow-win98-btn-pressed bg-win98-button-face flex items-center justify-center"
                                 onClick={onClose}
@@ -327,8 +373,8 @@ const Window = ({
                         {children}
                     </div>
 
-                    {/* Resize handles */}
-                    {!isMaximized && (
+                    {/* Resize handles - Only show on desktop */}
+                    {!isMaximized && !isMobile && (
                         <>
                             {/* Corner resize handles */}
                             <div

@@ -20,6 +20,7 @@ body {
     font-family: 'MS Sans Serif', sans-serif;
     -webkit-font-smoothing: none;
     -moz-osx-font-smoothing: none;
+    overscroll-behavior: none; /* Prevents pull-to-refresh on mobile */
 }
 
 /* Window improvements */
@@ -118,4 +119,74 @@ body {
     background: #c0c0c0;
     border: 1px solid;
     border-color: #dfdfdf #808080 #808080 #dfdfdf;
+}
+
+/* Fix z-index issues */
+.start-menu {
+    z-index: 1000 !important; /* Ensures start menu is always on top */
+}
+
+/* Language selector dropdown should be on top */
+.language-selector-dropdown {
+    z-index: 1000 !important;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    /* Increase tap targets */
+    button, a {
+        min-height: 36px;
+        min-width: 36px;
+    }
+
+    /* Hide scrollbars on mobile */
+    ::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+    }
+
+    ::-webkit-scrollbar-button {
+        display: none;
+    }
+
+    /* Font size adjustments for mobile */
+    .text-xs {
+        font-size: 12px !important;
+    }
+
+    .text-sm {
+        font-size: 14px !important;
+    }
+
+    /* Adjust spacing for mobile */
+    .p-1 {
+        padding: 0.25rem !important;
+    }
+
+    .p-2 {
+        padding: 0.5rem !important;
+    }
+
+    /* Ensure content doesn't overflow viewport */
+    .overflow-auto, .overflow-y-auto, .overflow-x-auto {
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Fix for mobile Safari rubber-banding */
+    html, body {
+        position: fixed;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Make taskbar better on mobile */
+    .h-taskbar {
+        height: 40px !important;
+    }
+
+    /* Less padding on mobile */
+    .window-content {
+        padding: 0.25rem !important;
+    }
 }

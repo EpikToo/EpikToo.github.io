@@ -56,7 +56,7 @@ const StartMenu = ({ isOpen, onClose, windows, onWindowSelect }) => {
     };
 
     return (
-        <div className="start-menu absolute bottom-[38px] left-1 z-50 w-40 md:w-48 max-h-[calc(100vh-60px)] overflow-auto touch-manipulation">
+        <div className="start-menu absolute bottom-[40px] left-1 w-40 md:w-48 max-h-[calc(100vh-60px)] overflow-auto touch-manipulation">
             <div className="bg-win98-taskbar border-2 border-white shadow-lg">
                 <div className="border-2 border-win98-window-border-dark">
                     <div className="flex">

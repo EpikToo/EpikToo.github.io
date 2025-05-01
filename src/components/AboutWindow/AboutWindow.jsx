@@ -15,9 +15,9 @@ const AboutWindow = () => {
 
     return (
         <div className="h-full overflow-auto bg-win98-button-face p-2 md:p-4">
-            <div className="flex flex-col md:flex-row gap-2 md:gap-4">
+            <div className="flex flex-col lg:flex-row gap-2 md:gap-4">
                 {/* Profile section */}
-                <div className="md:w-1/3 flex flex-col">
+                <div className="lg:w-1/3 flex flex-col">
                     <div className="bg-white border-2 border-win98-window-border-dark p-2 md:p-4 mb-4 hover:shadow-lg transition-shadow">
                         <div className="w-28 h-28 md:w-40 md:h-40 mx-auto mb-3 md:mb-4 border-2 border-win98-window-border-dark shadow-win98-btn overflow-hidden">
                             <img
@@ -45,38 +45,38 @@ const AboutWindow = () => {
                         <div className="p-2 md:p-3">
                             {/* Version Win98 stylisée des informations */}
                             <div className="space-y-1">
-                                <div className="flex items-center mb-1">
-                                    <div className="w-24 px-2 py-1 bg-win98-button-face text-xs text-black shadow-win98-btn mr-2 text-center font-bold">
+                                <div className="flex flex-col sm:flex-row items-start sm:items-center mb-1">
+                                    <div className="w-24 px-2 py-1 bg-win98-button-face text-xs text-black shadow-win98-btn mr-2 text-center font-bold mb-1 sm:mb-0">
                                         Age
                                     </div>
-                                    <div className="flex-1 px-2 py-1 bg-white border border-win98-window-border-dark text-xs">
+                                    <div className="flex-1 w-full sm:w-auto px-2 py-1 bg-white border border-win98-window-border-dark text-xs">
                                         {t('about.floriancontent1')}
                                     </div>
                                 </div>
 
-                                <div className="flex items-center mb-1">
-                                    <div className="w-24 px-2 py-1 bg-win98-button-face text-xs text-black shadow-win98-btn mr-2 text-center font-bold">
+                                <div className="flex flex-col sm:flex-row items-start sm:items-center mb-1">
+                                    <div className="w-24 px-2 py-1 bg-win98-button-face text-xs text-black shadow-win98-btn mr-2 text-center font-bold mb-1 sm:mb-0">
                                         Email
                                     </div>
-                                    <div className="flex-1 px-2 py-1 bg-white border border-win98-window-border-dark text-xs break-all">
+                                    <div className="flex-1 w-full sm:w-auto px-2 py-1 bg-white border border-win98-window-border-dark text-xs break-all">
                                         {t('about.floriancontent2')}
                                     </div>
                                 </div>
 
-                                <div className="flex items-center mb-1">
-                                    <div className="w-24 px-2 py-1 bg-win98-button-face text-xs text-black shadow-win98-btn mr-2 text-center font-bold">
+                                <div className="flex flex-col sm:flex-row items-start sm:items-center mb-1">
+                                    <div className="w-24 px-2 py-1 bg-win98-button-face text-xs text-black shadow-win98-btn mr-2 text-center font-bold mb-1 sm:mb-0">
                                         Phone
                                     </div>
-                                    <div className="flex-1 px-2 py-1 bg-white border border-win98-window-border-dark text-xs">
+                                    <div className="flex-1 w-full sm:w-auto px-2 py-1 bg-white border border-win98-window-border-dark text-xs">
                                         {t('about.floriancontent3')}
                                     </div>
                                 </div>
 
-                                <div className="flex items-center">
-                                    <div className="w-24 px-2 py-1 bg-win98-button-face text-xs text-black shadow-win98-btn mr-2 text-center font-bold">
+                                <div className="flex flex-col sm:flex-row items-start sm:items-center">
+                                    <div className="w-24 px-2 py-1 bg-win98-button-face text-xs text-black shadow-win98-btn mr-2 text-center font-bold mb-1 sm:mb-0">
                                         Mobility
                                     </div>
-                                    <div className="flex-1 px-2 py-1 bg-white border border-win98-window-border-dark text-xs">
+                                    <div className="flex-1 w-full sm:w-auto px-2 py-1 bg-white border border-win98-window-border-dark text-xs">
                                         {t('about.floriancontent4')}
                                     </div>
                                 </div>
@@ -99,7 +99,7 @@ const AboutWindow = () => {
                 </div>
 
                 {/* Information section */}
-                <div className="md:w-2/3">
+                <div className="lg:w-2/3">
                     <div className="bg-white border-2 border-win98-window-border-dark mb-3 md:mb-4 hover:shadow-lg transition-shadow">
                         <SectionTitle color="bg-green-600">{t('about.profiletitle')}</SectionTitle>
                         <div className="p-2 md:p-3">

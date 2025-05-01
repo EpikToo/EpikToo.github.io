@@ -25,25 +25,26 @@ const LanguageSelector = () => {
     return (
         <div ref={menuRef} className="relative">
             <button
-                className={`h-[24px] px-2 flex items-center gap-1 text-sm
+                className={`h-[24px] px-2 flex items-center gap-1 text-xs whitespace-nowrap
                     ${isOpen ? 'shadow-win98-btn-pressed' : 'shadow-win98-btn hover:shadow-win98-btn-pressed'}`}
                 onClick={() => setIsOpen(!isOpen)}
+                aria-label="Change language"
             >
                 {i18n.language.toUpperCase()}
             </button>
 
             {isOpen && (
-                <div className="absolute bottom-full right-0 mb-1 w-32 bg-win98-button-face border-2 border-white">
+                <div className="absolute bottom-full right-0 mb-1 w-32 bg-win98-button-face border-2 border-white language-selector-dropdown">
                     <div className="border-2 border-win98-window-border-dark">
                         <div className="py-1">
                             <button
-                                className="w-full px-2 py-1 text-left text-sm hover:bg-win98-window-title hover:text-white"
+                                className="w-full px-2 py-1 text-left text-xs hover:bg-win98-window-title hover:text-white"
                                 onClick={() => changeLanguage('fr')}
                             >
                                 {t('language.fr')}
                             </button>
                             <button
-                                className="w-full px-2 py-1 text-left text-sm hover:bg-win98-window-title hover:text-white"
+                                className="w-full px-2 py-1 text-left text-xs hover:bg-win98-window-title hover:text-white"
                                 onClick={() => changeLanguage('en')}
                             >
                                 {t('language.en')}

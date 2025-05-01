@@ -10,10 +10,11 @@ const CVDownloadButton = () => {
         <button
             className="flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold
                       border-2 border-win98-window-border-dark shadow-win98-btn hover:shadow-win98-btn-pressed
-                      transition-colors w-full"
+                      transition-colors w-full min-h-[44px]"
             onClick={() => window.open(cvFileName, '_blank')}
+            aria-label="Download CV"
         >
-            <svg width="16" height="16" viewBox="0 0 16 16" className="inline-block">
+            <svg width="16" height="16" viewBox="0 0 16 16" className="inline-block flex-shrink-0">
                 <path d="M8,2 L8,10 M5,7 L8,10 L11,7" stroke="white" strokeWidth="2" strokeLinecap="round"/>
                 <path d="M3,12 L13,12" stroke="white" strokeWidth="2" strokeLinecap="round"/>
             </svg>
