@@ -173,9 +173,10 @@ const Terminal = ({ onCommandExecuted }) => {
         if (e.key === 'Enter') {
             if (matrixMode || apertureMode) return;
 
-            setHistory(prev => [...prev, `C:\\> ${currentCommand}`]);
+            const commandToExecute = isMobile ? currentCommand.split('').reverse().join('') : currentCommand;
+            setHistory(prev => [...prev, `C:\\> ${commandToExecute}`]);
 
-            const results = executeCommand(currentCommand);
+            const results = executeCommand(commandToExecute);
 
             if (results && results.length > 0) {
                 setHistory(prev => [...prev, ...results]);
