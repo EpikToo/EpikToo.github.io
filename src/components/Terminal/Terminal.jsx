@@ -211,10 +211,14 @@ const Terminal = ({ onCommandExecuted }) => {
     };
 
     const handleInputChange = (e) => {
-        // Stocke directement la valeur telle quelle
-        setCurrentCommand(e.target.value);
-    };
+        const inputValue = e.target.value;
 
+        if (isMobile && inputValue.split('').reverse().join('') === currentCommand) {
+            setCurrentCommand(inputValue.split('').reverse().join(''));
+        } else {
+            setCurrentCommand(inputValue);
+        }
+    };
     return (
         <>
             <div
