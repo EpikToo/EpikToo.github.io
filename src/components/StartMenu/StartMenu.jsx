@@ -63,14 +63,11 @@ const StartMenu = ({ isOpen, onClose, windows, onWindowSelect }) => {
     if (!isOpen) return null;
 
     const handleCloseClick = () => {
-        const confirmClose = window.confirm(t('menu.confirm_close') || "Are you sure you want to close the portfolio?");
-        if (confirmClose) {
-            window.open('', '_self').close();
-            setTimeout(() => {
-                window.location.href = 'about:blank';
-                window.close();
-            }, 100);
-        }
+        window.open('', '_self').close();
+        setTimeout(() => {
+            window.location.href = 'about:blank';
+            window.close();
+        }, 100);
     };
 
     const mobileMenuStyle = {

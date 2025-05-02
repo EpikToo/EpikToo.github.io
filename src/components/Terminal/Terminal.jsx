@@ -14,6 +14,22 @@ const Terminal = ({ onCommandExecuted }) => {
     const [showBSOD, setShowBSOD] = useState(false);
     const inputRef = useRef(null);
     const terminalRef = useRef(null);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            const byWidth = window.innerWidth < 768;
+            const byUserAgent = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            const byTouchPoints = navigator.maxTouchPoints > 0;
+
+            const isMobileDevice = byWidth || (byUserAgent && byTouchPoints);
+            setIsMobile(isMobileDevice);
+        };
+
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     useEffect(() => {
         setHistory([t('terminal.welcome')]);
@@ -210,7 +226,7 @@ const Terminal = ({ onCommandExecuted }) => {
                 {!matrixMode && !apertureMode && (
                     <div className="text-green-500 flex text-xs md:text-sm break-all">
                         <span>C:\&gt;&nbsp;</span>
-                        <span>{currentCommand}</span>
+                        <span>{isMobile ? currentCommand.split('').reverse().join('') : currentCommand}</span>
                         <span
                             className={`w-1.5 md:w-2 ml-0.5 h-4 md:h-5 ${cursorVisible ? 'bg-green-500' : 'bg-transparent'}`}
                         >
