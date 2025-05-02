@@ -14,22 +14,6 @@ const Terminal = ({ onCommandExecuted }) => {
     const [showBSOD, setShowBSOD] = useState(false);
     const inputRef = useRef(null);
     const terminalRef = useRef(null);
-    const [isMobile, setIsMobile] = useState(false);
-
-    useEffect(() => {
-        const checkMobile = () => {
-            const byWidth = window.innerWidth < 768;
-            const byUserAgent = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-            const byTouchPoints = navigator.maxTouchPoints > 0;
-
-            const isMobileDevice = byWidth || (byUserAgent && byTouchPoints);
-            setIsMobile(isMobileDevice);
-        };
-
-        checkMobile();
-        window.addEventListener('resize', checkMobile);
-        return () => window.removeEventListener('resize', checkMobile);
-    }, []);
 
     useEffect(() => {
         setHistory([t('terminal.welcome')]);
@@ -173,16 +157,9 @@ const Terminal = ({ onCommandExecuted }) => {
         if (e.key === 'Enter') {
             if (matrixMode || apertureMode) return;
 
-            const commandToLog = currentCommand;
-            let commandToExecute = currentCommand;
+            setHistory(prev => [...prev, `C:\\> ${currentCommand}`]);
 
-            // Sur mobile, la commande est stockée à l'envers, donc on l'inverse pour l'exécution
-            if (isMobile) {
-                commandToExecute = currentCommand.split('').reverse().join('');
-            }
-
-            setHistory(prev => [...prev, `C:\\> ${commandToLog}`]);
-            const results = executeCommand(commandToExecute);
+            const results = executeCommand(currentCommand);
 
             if (results && results.length > 0) {
                 setHistory(prev => [...prev, ...results]);
@@ -210,15 +187,6 @@ const Terminal = ({ onCommandExecuted }) => {
         setHistory(prev => [...prev, "Portal test complete. Thank you for your participation."]);
     };
 
-    const handleInputChange = (e) => {
-        const inputValue = e.target.value;
-
-        if (isMobile && inputValue.split('').reverse().join('') === currentCommand) {
-            setCurrentCommand(inputValue.split('').reverse().join(''));
-        } else {
-            setCurrentCommand(inputValue);
-        }
-    };
     return (
         <>
             <div
@@ -256,7 +224,7 @@ const Terminal = ({ onCommandExecuted }) => {
                     type="text"
                     className="opacity-0 absolute w-0 h-0"
                     value={currentCommand}
-                    onChange={handleInputChange}
+                    onChange={(e) => setCurrentCommand(e.target.value)}
                     onKeyDown={handleCommand}
                     autoFocus
                 />
