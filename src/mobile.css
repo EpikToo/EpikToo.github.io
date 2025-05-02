@@ -47,6 +47,14 @@ div[style*="width"][style*="height"] > div > div {
     overflow: hidden !important;
 }
 
+/* Start menu specific positioning */
+.start-menu {
+    position: fixed !important;
+    bottom: 40px !important;
+    left: 1px !important;
+    top: auto !important;
+}
+
 /* Fixes for mobile scaling */
 @media (max-width: 768px) {
     /* Meilleure apparence pour Orangina Man */
@@ -59,14 +67,6 @@ div[style*="width"][style*="height"] > div > div {
     button {
         margin: 2px;
         min-height: 36px;
-    }
-
-    /* Make the start menu fixed at the bottom */
-    .start-menu {
-        position: fixed !important;
-        bottom: 40px !important;
-        left: 1px !important;
-        max-height: calc(100vh - 60px) !important;
     }
 
     /* Fix language dropdown position */

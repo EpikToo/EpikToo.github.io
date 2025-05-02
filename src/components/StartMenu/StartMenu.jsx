@@ -73,20 +73,29 @@ const StartMenu = ({ isOpen, onClose, windows, onWindowSelect }) => {
         }
     };
 
-    const menuStyles = {
-        position: 'absolute',
-        left: isMobile ? '1px' : 'auto',
-        bottom: isMobile ? '40px' : undefined,
-        top: isMobile ? undefined : 'auto',
+    const mobileMenuStyle = {
+        position: 'fixed',
+        bottom: '40px',
+        left: '1px',
+        top: 'auto',
         zIndex: 9999,
-        width: isMobile ? '160px' : '40px',
-        maxHeight: isMobile ? 'calc(100vh - 60px)' : undefined
+        width: '160px',
+        maxHeight: 'calc(100vh - 60px)',
+        overflow: 'auto'
+    };
+
+    const desktopMenuStyle = {
+        position: 'absolute',
+        top: 'auto',
+        zIndex: 9999,
+        width: '240px',
+        overflow: 'auto'
     };
 
     return (
         <div
-            style={menuStyles}
-            className="start-menu overflow-auto touch-manipulation"
+            className="start-menu touch-manipulation"
+            style={isMobile ? mobileMenuStyle : desktopMenuStyle}
         >
             <div className="bg-win98-taskbar border-2 border-white shadow-lg">
                 <div className="border-2 border-win98-window-border-dark">

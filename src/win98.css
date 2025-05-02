@@ -219,4 +219,12 @@ body {
     .window-content {
         padding: 0.25rem !important;
     }
+
+    /* Fix for the start menu on mobile */
+    .start-menu {
+        position: fixed !important;
+        bottom: 40px !important;
+        left: 1px !important;
+        top: auto !important;
+    }
 }
