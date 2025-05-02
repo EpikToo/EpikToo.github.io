@@ -173,9 +173,15 @@ const Terminal = ({ onCommandExecuted }) => {
         if (e.key === 'Enter') {
             if (matrixMode || apertureMode) return;
 
-            const commandToExecute = isMobile ? currentCommand.split('').reverse().join('') : currentCommand;
-            setHistory(prev => [...prev, `C:\\> ${commandToExecute}`]);
+            const commandToLog = currentCommand;
+            let commandToExecute = currentCommand;
 
+            // Sur mobile, la commande est stockée à l'envers, donc on l'inverse pour l'exécution
+            if (isMobile) {
+                commandToExecute = currentCommand.split('').reverse().join('');
+            }
+
+            setHistory(prev => [...prev, `C:\\> ${commandToLog}`]);
             const results = executeCommand(commandToExecute);
 
             if (results && results.length > 0) {
@@ -204,6 +210,11 @@ const Terminal = ({ onCommandExecuted }) => {
         setHistory(prev => [...prev, "Portal test complete. Thank you for your participation."]);
     };
 
+    const handleInputChange = (e) => {
+        // Stocke directement la valeur telle quelle
+        setCurrentCommand(e.target.value);
+    };
+
     return (
         <>
             <div
@@ -227,7 +238,7 @@ const Terminal = ({ onCommandExecuted }) => {
                 {!matrixMode && !apertureMode && (
                     <div className="text-green-500 flex text-xs md:text-sm break-all">
                         <span>C:\&gt;&nbsp;</span>
-                        <span>{isMobile ? currentCommand.split('').reverse().join('') : currentCommand}</span>
+                        <span>{currentCommand}</span>
                         <span
                             className={`w-1.5 md:w-2 ml-0.5 h-4 md:h-5 ${cursorVisible ? 'bg-green-500' : 'bg-transparent'}`}
                         >
@@ -241,7 +252,7 @@ const Terminal = ({ onCommandExecuted }) => {
                     type="text"
                     className="opacity-0 absolute w-0 h-0"
                     value={currentCommand}
-                    onChange={(e) => setCurrentCommand(e.target.value)}
+                    onChange={handleInputChange}
                     onKeyDown={handleCommand}
                     autoFocus
                 />
