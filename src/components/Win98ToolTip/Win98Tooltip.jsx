@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { AboutIcon } from '../icons/Win98Icons';
 
 const Win98Tooltip = ({
@@ -8,12 +8,30 @@ const Win98Tooltip = ({
                           onClose,
                           delay = 0,
                           autoClose = 0,
-                          targetRef = null  // Référence vers l'élément cible
+                          targetRef = null
                       }) => {
     const [isVisible, setIsVisible] = useState(false);
     const [isMounted, setIsMounted] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
+        // Vérifier si c'est un appareil mobile
+        const checkMobile = () => {
+            const isMobileDevice = window.innerWidth < 768 ||
+                (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+                    && navigator.maxTouchPoints > 0);
+            setIsMobile(isMobileDevice);
+        };
+
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+
+        // Si c'est un mobile, ne pas afficher le tooltip du tout
+        if (isMobile) {
+            if (onClose) onClose();
+            return;
+        }
+
         const showTimeout = setTimeout(() => {
             setIsMounted(true);
             setIsVisible(true);
@@ -33,12 +51,14 @@ const Win98Tooltip = ({
                 targetElement.removeEventListener('mouseenter', handleTargetHover);
                 clearTimeout(showTimeout);
                 clearTimeout(closeTimeout);
+                window.removeEventListener('resize', checkMobile);
             };
         }
 
         return () => {
             clearTimeout(showTimeout);
             if (closeTimeout) clearTimeout(closeTimeout);
+            window.removeEventListener('resize', checkMobile);
         };
     }, [delay, autoClose, onClose, targetRef]);
 
@@ -50,7 +70,8 @@ const Win98Tooltip = ({
         }, 150);
     };
 
-    if (!isMounted) return null;
+    // Ne rien rendre sur mobile ou si le tooltip n'est pas monté
+    if (isMobile || !isMounted) return null;
 
     const positionClasses = {
         top: 'bottom-full left-1/2 -translate-x-1/2 mb-3',

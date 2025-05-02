@@ -12,10 +12,16 @@ import Taskbar from './components/Taskbar/Taskbar';
 import BootAnimation from './components/BootAnimation/BootAnimation';
 import { WindowManagerProvider } from './contexts/WindowManager';
 
+const TASKBAR_HEIGHT = 40; // Définir explicitement la hauteur de la taskbar
+
 const AppContent = () => {
     const { t } = useTranslation();
     const [isBooting, setIsBooting] = useState(true);
     const [isMobile, setIsMobile] = useState(false);
+    const [windowDimensions, setWindowDimensions] = useState({
+        width: window.innerWidth,
+        height: window.innerHeight
+    });
     const [windows, setWindows] = useState({
         terminal: {
             isOpen: false,
@@ -44,7 +50,12 @@ const AppContent = () => {
     });
 
     useEffect(() => {
-        const checkMobile = () => {
+        const handleResize = () => {
+            setWindowDimensions({
+                width: window.innerWidth,
+                height: window.innerHeight
+            });
+
             const isMobileDevice = window.innerWidth < 768 ||
                 (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
                     && navigator.maxTouchPoints > 0);
@@ -52,12 +63,9 @@ const AppContent = () => {
             setIsMobile(isMobileDevice);
         };
 
-        checkMobile();
-        window.addEventListener('resize', checkMobile);
-
-        return () => {
-            window.removeEventListener('resize', checkMobile);
-        };
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     const handleBootComplete = () => {
@@ -197,9 +205,12 @@ const AppContent = () => {
 
     const getWindowSize = (windowId) => {
         if (isMobile) {
+            // Calculer la hauteur disponible exacte en soustrayant la hauteur de la taskbar
+            const availableHeight = windowDimensions.height - TASKBAR_HEIGHT;
+
             return {
-                width: window.innerWidth,
-                height: window.innerHeight - 40
+                width: windowDimensions.width,
+                height: availableHeight
             };
         }
 
@@ -217,9 +228,20 @@ const AppContent = () => {
         return <BootAnimation onBootComplete={handleBootComplete} />;
     }
 
+    // Calculer explicitement la hauteur disponible pour le contenu principal
+    const mainHeight = windowDimensions.height - TASKBAR_HEIGHT;
+
     return (
         <div className="h-screen flex flex-col overflow-hidden bg-win98-desktop cursor-win98-default">
-            <main className="flex-1 relative">
+            {/* Définir une hauteur fixe pour le contenu principal, exactement égale à la hauteur de l'écran moins la taskbar */}
+            <main
+                className="relative"
+                style={{
+                    height: `${mainHeight}px`,
+                    overflow: 'hidden',
+                    flexShrink: 0
+                }}
+            >
                 {windows.terminal.isOpen && (
                     <Window
                         title={t('windows.terminal.title')}
@@ -229,6 +251,7 @@ const AppContent = () => {
                         defaultPosition={getWindowPosition(0)}
                         defaultSize={getWindowSize('terminal')}
                         className={`win98-window ${windows.terminal.isActive ? 'active' : ''}`}
+                        parentHeight={mainHeight}
                     >
                         <Terminal onCommandExecuted={handleTerminalCommand} />
                     </Window>
@@ -243,6 +266,7 @@ const AppContent = () => {
                         defaultPosition={getWindowPosition(1)}
                         defaultSize={getWindowSize('about')}
                         className={`win98-window ${windows.about.isActive ? 'active' : ''}`}
+                        parentHeight={mainHeight}
                     >
                         <AboutWindow />
                     </Window>
@@ -257,6 +281,7 @@ const AppContent = () => {
                         defaultPosition={getWindowPosition(2)}
                         defaultSize={getWindowSize('projects')}
                         className={`win98-window ${windows.projects.isActive ? 'active' : ''}`}
+                        parentHeight={mainHeight}
                     >
                         <ProjectsWindow />
                     </Window>
@@ -271,6 +296,7 @@ const AppContent = () => {
                         defaultPosition={getWindowPosition(3)}
                         defaultSize={getWindowSize('experience')}
                         className={`win98-window ${windows.experience.isActive ? 'active' : ''}`}
+                        parentHeight={mainHeight}
                     >
                         <ExperienceWindow />
                     </Window>
@@ -281,6 +307,7 @@ const AppContent = () => {
                 windows={windows}
                 onWindowClick={handleTaskbarClick}
                 onStartMenuSelect={handleStartMenuClick}
+                style={{ height: `${TASKBAR_HEIGHT}px`, flexShrink: 0 }}
             />
         </div>
     );

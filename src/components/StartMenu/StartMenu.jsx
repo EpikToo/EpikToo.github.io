@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TerminalIcon, AboutIcon, ProjectsIcon, ExperienceIcon } from '../icons/Win98Icons';
 
@@ -45,6 +45,20 @@ const CloseIcon = () => (
 
 const StartMenu = ({ isOpen, onClose, windows, onWindowSelect }) => {
     const { t } = useTranslation();
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            const isMobileDevice = window.innerWidth < 768 ||
+                (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+                    && navigator.maxTouchPoints > 0);
+            setIsMobile(isMobileDevice);
+        };
+
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     if (!isOpen) return null;
 
@@ -59,8 +73,21 @@ const StartMenu = ({ isOpen, onClose, windows, onWindowSelect }) => {
         }
     };
 
+    const menuStyles = {
+        position: 'absolute',
+        left: isMobile ? '1px' : 'auto',
+        bottom: isMobile ? '40px' : undefined,
+        top: isMobile ? undefined : 'auto',
+        zIndex: 9999,
+        width: isMobile ? '160px' : '40px',
+        maxHeight: isMobile ? 'calc(100vh - 60px)' : undefined
+    };
+
     return (
-        <div className="start-menu absolute bottom-[40px] left-1 w-40 md:w-48 max-h-[calc(100vh-60px)] overflow-auto touch-manipulation">
+        <div
+            style={menuStyles}
+            className="start-menu overflow-auto touch-manipulation"
+        >
             <div className="bg-win98-taskbar border-2 border-white shadow-lg">
                 <div className="border-2 border-win98-window-border-dark">
                     <div className="flex">

@@ -10,7 +10,8 @@ const Window = ({
                     isMinimized = false,
                     defaultPosition = { x: 100, y: 100 },
                     defaultSize = { width: 400, height: 300 },
-                    className = ""
+                    className = "",
+                    parentHeight = null
                 }) => {
     const windowId = useId();
     const { registerWindow, unregisterWindow, bringToFront } = useWindowManager();
@@ -69,10 +70,10 @@ const Window = ({
             if (isMaximized && windowRef.current) {
                 const parent = windowRef.current.parentElement;
                 if (parent) {
-                    const taskbarHeight = 40;
                     setSize({
                         width: parent.clientWidth,
-                        height: parent.clientHeight - taskbarHeight
+                        // Utiliser la hauteur parentHeight si elle est fournie
+                        height: parentHeight || (parent.clientHeight)
                     });
                     setPosition({ x: 0, y: 0 });
                 }
@@ -84,7 +85,7 @@ const Window = ({
             window.removeEventListener('resize', handleWindowResize);
             unregisterWindow(windowId);
         };
-    }, [isMaximized, isMobile]);
+    }, [isMaximized, isMobile, parentHeight]);
 
     const adjustWindowPosition = () => {
         if (!windowRef.current) return;
@@ -121,11 +122,11 @@ const Window = ({
             setPreMaximizeState(saveCurrentState());
             const parent = windowRef.current?.parentElement;
             if (parent) {
-                const taskbarHeight = 40;
                 setPosition({ x: 0, y: 0 });
                 setSize({
                     width: parent.clientWidth,
-                    height: parent.clientHeight - taskbarHeight
+                    // Utiliser exactement la hauteur parentHeight si elle est fournie
+                    height: parentHeight || parent.clientHeight
                 });
                 setIsMaximized(true);
             }
@@ -324,18 +325,25 @@ const Window = ({
                 width: `${size.width}px`,
                 height: `${size.height}px`,
                 cursor: isDragging ? 'grabbing' : 'default',
-                zIndex: zIndex
+                zIndex: zIndex,
+                overflow: 'hidden',
+                boxSizing: 'border-box',
+                padding: 0,
+                margin: 0
             }}
             onMouseDown={handleWindowClick}
         >
-            <div className="bg-win98-button-face border-2 border-white h-full w-full shadow-win98-window">
-                <div className="border-2 border-win98-window-border-dark h-full flex flex-col">
+            <div className={`bg-win98-button-face border-2 border-white h-full w-full shadow-win98-window ${isMaximized ? 'mx-0 my-0 px-0 py-0' : ''}`}
+                 style={{ boxSizing: 'border-box', padding: 0, margin: 0 }}>
+                <div className="border-2 border-win98-window-border-dark h-full flex flex-col"
+                     style={{ boxSizing: 'border-box', padding: 0, margin: 0 }}>
                     <div
                         className={`window-title-bar px-2 py-1 flex justify-between items-center cursor-grab select-none
                             ${isActive ? 'bg-[#000055] text-white' : 'bg-gray-500 text-gray-200'}`}
                         onMouseDown={handleMouseDown}
                         onTouchStart={handleTouchStart}
                         onDoubleClick={handleTitleBarDoubleClick}
+                        style={{ flexShrink: 0 }}
                     >
                         <span className="font-bold text-xs md:text-sm truncate max-w-[calc(100%-60px)]">
                             {title}
@@ -364,7 +372,16 @@ const Window = ({
                         </div>
                     </div>
 
-                    <div ref={contentRef} className="flex-1 overflow-hidden relative">
+                    <div
+                        ref={contentRef}
+                        className="flex-1 overflow-hidden relative"
+                        style={{
+                            height: 'calc(100% - 30px)',
+                            boxSizing: 'border-box',
+                            padding: 0,
+                            margin: 0
+                        }}
+                    >
                         {children}
                     </div>
 

@@ -89,7 +89,7 @@ const ProjectsWindow = () => {
 
             <div className="flex flex-col flex-1 overflow-hidden">
                 <div className="bg-win98-button-face p-2 md:p-4 z-10">
-                    <h2 className="text-base md:text-lg font-bold bg-blue-600 text-white px-2 py-1 rounded-sm truncate">
+                    <h2 className="text-base md:text-lg font-bold bg-blue-600 text-white px-2 py-1 truncate">
                         {t('about.projectstitle')}
                     </h2>
                 </div>

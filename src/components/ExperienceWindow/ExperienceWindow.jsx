@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 const SectionTitle = ({ children, color = "bg-blue-600" }) => (
-    <div className={`${color} text-white px-2 py-1 mb-2 rounded-sm`}>
+    <div className={`${color} text-white px-2 py-1 mb-2`}>
         <h2 className="text-sm md:text-lg font-bold truncate">{children}</h2>
     </div>
 );

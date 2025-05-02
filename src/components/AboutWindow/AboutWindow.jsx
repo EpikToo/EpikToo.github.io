@@ -1,25 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import CVDownloadButton from '../CVDownloadButton/CVDownloadButton';
 import { LinkedInButton, GitHubButton } from '../SocialButtons/SocialButtons';
-import './OranginaAnimation.css'; // Importer le fichier CSS pour l'animation
+import './OranginaAnimation.css';
 
 const SectionTitle = ({ children, color = "bg-win98-window-title" }) => (
-    <div className={`${color} text-white px-2 py-1 mb-2 rounded-sm`}>
+    <div className={`${color} text-white px-2 py-1 mb-2`}>
         <h2 className="text-sm md:text-lg font-bold truncate">{children}</h2>
     </div>
 );
 
 const AboutWindow = () => {
     const { t } = useTranslation();
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            const isMobileDevice = window.innerWidth < 768 ||
+                (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+                    && navigator.maxTouchPoints > 0);
+            setIsMobile(isMobileDevice);
+        };
+
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     return (
         <div className="h-full overflow-auto bg-win98-button-face p-2 md:p-4">
             <div className="flex flex-col lg:flex-row gap-2 md:gap-4">
-                {/* Profile section */}
                 <div className="lg:w-1/3 flex flex-col">
                     <div className="bg-white border-2 border-win98-window-border-dark p-2 md:p-4 mb-4 hover:shadow-lg transition-shadow">
-                        <div className="w-28 h-28 md:w-40 md:h-40 mx-auto mb-3 md:mb-4 border-2 border-win98-window-border-dark shadow-win98-btn overflow-hidden">
+                        <div className={`${isMobile ? 'w-36 h-36' : 'w-28 h-28 md:w-40 md:h-40'} mx-auto mb-3 md:mb-4 border-2 border-win98-window-border-dark shadow-win98-btn overflow-hidden`}>
                             <img
                                 src="/profilepic.png"
                                 alt="Florian Savalle"
@@ -43,7 +56,6 @@ const AboutWindow = () => {
                     <div className="bg-white border-2 border-win98-window-border-dark mb-4 hover:shadow-lg transition-shadow">
                         <SectionTitle color="bg-blue-600">Info</SectionTitle>
                         <div className="p-2 md:p-3">
-                            {/* Version Win98 stylisée des informations */}
                             <div className="space-y-1">
                                 <div className="flex flex-col sm:flex-row items-start sm:items-center mb-1">
                                     <div className="w-24 px-2 py-1 bg-win98-button-face text-xs text-black shadow-win98-btn mr-2 text-center font-bold mb-1 sm:mb-0">
@@ -87,7 +99,7 @@ const AboutWindow = () => {
                     <div className="bg-white border-2 border-win98-window-border-dark mb-4 hover:shadow-lg transition-shadow overflow-hidden">
                         <SectionTitle color="bg-yellow-600">Orangina Man</SectionTitle>
                         <div className="p-2 flex justify-center bg-white">
-                            <div className="max-w-full">
+                            <div className={`${isMobile ? 'max-w-[70%]' : 'max-w-full'}`}>
                                 <img
                                     src="/orangina.png"
                                     alt="Orangina Fun"
@@ -98,7 +110,6 @@ const AboutWindow = () => {
                     </div>
                 </div>
 
-                {/* Information section */}
                 <div className="lg:w-2/3">
                     <div className="bg-white border-2 border-win98-window-border-dark mb-3 md:mb-4 hover:shadow-lg transition-shadow">
                         <SectionTitle color="bg-green-600">{t('about.profiletitle')}</SectionTitle>

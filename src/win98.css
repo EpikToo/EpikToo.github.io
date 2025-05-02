@@ -26,6 +26,8 @@ body {
 /* Window improvements */
 .win98-window {
     transition: box-shadow 0.3s ease;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
 }
 
 .win98-window:hover {
@@ -143,6 +145,20 @@ body {
 .h-taskbar {
     z-index: 950 !important;
     position: relative;
+}
+
+/* Fix for the container divs inside windows */
+.flex-1 {
+    min-height: 0;
+}
+
+.h-full {
+    height: 100%;
+}
+
+/* Global box-sizing fix */
+*, *::before, *::after {
+    box-sizing: border-box;
 }
 
 /* Mobile optimizations */

@@ -14,7 +14,6 @@
 .start-menu,
 .language-selector-dropdown {
     z-index: 9999 !important;
-    position: fixed !important;
 }
 
 /* Windows should have a lower z-index than menus */
@@ -32,15 +31,37 @@
     position: relative;
 }
 
+/* Fix for maximized windows to eliminate the blue strip */
+div[style*="width"][style*="height"] {
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
+div[style*="width"][style*="height"] > div {
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
+div[style*="width"][style*="height"] > div > div {
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
 /* Fixes for mobile scaling */
 @media (max-width: 768px) {
+    /* Meilleure apparence pour Orangina Man */
+    .orangina-mirror {
+        max-width: 70%;
+        margin: 0 auto;
+    }
+
     /* Better button spacing for touch */
     button {
         margin: 2px;
         min-height: 36px;
     }
 
-    /* Force menu position to be fixed relative to viewport */
+    /* Make the start menu fixed at the bottom */
     .start-menu {
         position: fixed !important;
         bottom: 40px !important;
@@ -90,5 +111,22 @@
     /* Remove any window padding */
     .win98-window > div {
         margin: 0 !important;
+    }
+
+    /* Fix for maximized windows */
+    .flex-1 {
+        flex: 1 1 0% !important;
+        min-height: 0 !important;
+        height: auto !important;
+    }
+
+    .h-full {
+        height: 100% !important;
+        min-height: 0 !important;
+    }
+
+    .overflow-auto {
+        overflow: auto !important;
+        height: 100% !important;
     }
 }

@@ -4,9 +4,20 @@ import { useTranslation } from 'react-i18next';
 const LanguageSelector = () => {
     const { t, i18n } = useTranslation();
     const [isOpen, setIsOpen] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
     const menuRef = useRef();
 
     useEffect(() => {
+        const checkMobile = () => {
+            const isMobileDevice = window.innerWidth < 768 ||
+                (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+                    && navigator.maxTouchPoints > 0);
+            setIsMobile(isMobileDevice);
+        };
+
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+
         const handleClickOutside = (e) => {
             if (menuRef.current && !menuRef.current.contains(e.target)) {
                 setIsOpen(false);
@@ -14,7 +25,10 @@ const LanguageSelector = () => {
         };
 
         document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+            window.removeEventListener('resize', checkMobile);
+        };
     }, []);
 
     const changeLanguage = (lng) => {
@@ -22,11 +36,19 @@ const LanguageSelector = () => {
         setIsOpen(false);
     };
 
+    const buttonStyles = {
+        height: isMobile ? '20px' : '24px',
+        padding: isMobile ? '0 4px' : '0 8px',
+        fontSize: isMobile ? '10px' : 'inherit',
+        minHeight: isMobile ? '20px' : '24px'
+    };
+
     return (
         <div ref={menuRef} className="relative">
             <button
-                className={`h-[24px] px-2 flex items-center gap-1 text-xs whitespace-nowrap
+                className={`flex items-center gap-1 text-xs whitespace-nowrap
                     ${isOpen ? 'shadow-win98-btn-pressed' : 'shadow-win98-btn hover:shadow-win98-btn-pressed'}`}
+                style={buttonStyles}
                 onClick={() => setIsOpen(!isOpen)}
                 aria-label="Change language"
             >
